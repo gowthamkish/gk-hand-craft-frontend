@@ -1,5 +1,4 @@
 import {
-  fetchLoginRequest,
   fetchLoginSuccess,
   fetchLoginFailure,
 } from "../loginRedux/loginAction";
@@ -11,30 +10,30 @@ import {
 
 import axios from "axios";
 import { baseUrl } from "../../utilities/baseUrl";
+import { startLoader, stopLoader } from "../global/loader/loaderAction";
 
 export const fetchLogin = (payload) => {
-  debugger;
   return (dispatch) => {
-    dispatch(fetchLoginRequest());
+    dispatch(startLoader());
 
     let url = baseUrl + `/auth/login`;
 
     axios
       .post(url, payload)
       .then((response) => {
-        debugger;
         const data = response.data;
         dispatch(fetchLoginSuccess(data));
+        dispatch(stopLoader());
       })
       .catch((error) => {
         const errorMsg = error.message;
         dispatch(fetchLoginFailure(errorMsg));
+        dispatch(stopLoader());
       });
   };
 };
 
 export const fetchRegister = (payload) => {
-  debugger;
   return (dispatch) => {
     dispatch(fetchRegisterRequest());
 
@@ -43,7 +42,6 @@ export const fetchRegister = (payload) => {
     axios
       .post(url, payload)
       .then((response) => {
-        debugger;
         const data = response.data;
         dispatch(fetchRegisterSuccess(data));
       })
