@@ -56,6 +56,7 @@ const Login = () => {
         navigate("/home");
       }
     }
+    // eslint-disable-next-line
   }, [loginResponse]);
 
   return (
