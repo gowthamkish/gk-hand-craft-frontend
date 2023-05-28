@@ -1,1 +1,1 @@
-export const baseUrl = "http://localhost:5000/api";
+export const baseUrl = "https://gk-craft-server.onrender.com/api";
